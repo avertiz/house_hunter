@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="title-font">Casamomo</h1>
+<span>
+    <h4 style="display:inline-block; padding: 4px;">Listings</h4>
+    <a class="listing-link" href="{{ url_for('add_listing') }}">Add Listing</a>
+</span>
+{% for listing in listings %}
+<div class="listing-card">
+    <span>
+        <h4 style="display:inline-block; padding: 4px;">
+            <a href="{{ listing.url }}" target="_blank">{{ listing.address }}</a>
+            | Score: {{ listing.av_score}}/{{ av_model_score_total }}
+        </h4>
+        <a style="padding: 4px;" href="{{ url_for('edit_listing', listing_id=listing.id) }}">Edit</a>
+        <form action="{{ url_for('delete_listing', listing_id=listing.id) }}" method="post"
+            style="display:inline-block;">
+            <button class="btn-red" type="submit" onclick="return confirm('Delete this listing?')">Delete</button>
+        </form>
+    </span>
+
+    <span>
+        <h4 class="price-font">${{ "{:,.0f}".format(listing.list_price) }}</h4>
+        <h5 class="price-font">Est. Monthly Payment: ${{ "{:,.0f}".format(listing.total_monthly_payment) }}</h5>
+        <h6 class="price-font">HOA: ${{ "{:,.0f}".format(listing.monthly_hoa) }}</h6>
+        <h6 class="price-font">Property Taxes: ${{ "{:,.0f}".format(listing.annual_property_tax) }}</h6>
+    </span>
+
+    {% for col_group in col_groups %}
+        {% set col_group_name = col_group %}
+        <p>
+            <strong>{{ col_group_name }}: </strong>
+            {% for col, attributes in cols.items() %}
+                {% if attributes[0] == col_group_name %}
+                    {% if attributes[1] == 'Boolean' %}
+                        {{ attributes[2] }}: {{ 'Yes' if listing[col] else 'No' }} |
+                    {% elif attributes[1] == 'Integer' %}
+                        {{ attributes[2] }}: {{ listing[col] if listing[col] else ' ' }} |
+                    {% endif %}
+                {% endif %}  
+            {% endfor %}
+        </p>
+    {% endfor %}
+
+    <h5 class="mt-3">Comments:</h5>
+    {% for comment in listing.comments %}
+        <p>
+            <div class="d-inline">
+                <b>{{ comment.user.name }}:</b> {{ comment.content }}
+                {% if session['user_id'] == comment.user.id %}
+                <a href="{{ url_for('edit_comment', comment_id=comment.id) }}">Edit Comment</a>
+                <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" method="post" style="display:inline;">
+                    <button class="btn-red" type="submit" onclick="return confirm('Delete this comment?')">Delete Comment</button>
+                </form>
+                {% endif %}
+            </div>
+        </p>
+    {% endfor %}
+
+    <form method="post" action="{{ url_for('comment', listing_id=listing.id) }}">
+        <input name="content" placeholder="Add a comment">
+        <button class="listing-actions btn btn-primary" type="submit">Add Comment</button>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add New Listing</h2>
+<form method="post" class="mb-4">
+    <div class="mb-3">
+        <input name="url" placeholder="Listing URL" required>
+    </div>
+
+    <h6>Cost:</h6>
+    <div class="mb-3">
+        <input name="list_price" type="number" placeholder="List Price" required>
+        <br><input name="annual_property_tax" type="number" placeholder="Property Taxes" required>
+        <br><input name="monthly_hoa" type="number" placeholder="HOA Fee" required>
+    </div>
+
+    {% for col_group in col_groups %}
+        {% set col_group_name = col_group %}
+        <div class="mb-3">
+            <h6>{{ col_group_name }}:</h6>
+            {% for col, attributes in cols.items() %}
+                {% if attributes[0] == col_group_name %}
+                    {% if attributes[1] == 'Boolean' %}
+                        <label for="{{ col }}">{{ attributes[2] }} </label>
+                        <input name="{{ col }}" type="checkbox">
+                    {% elif attributes[1] == 'Integer' %}
+                        <input name="{{ col }}" type="number" placeholder="{{ attributes[2] }} (1-3)">
+                    {% endif %}
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{{ url_for('listings') }}" class="btn btn-secondary">Cancel</a>
+    </div> 
+</form>
+{% endblock %}

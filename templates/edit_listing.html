@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Listing</h2>
+<form method="post" class="mb-4">
+    <div class="mb-3">
+        <label for="url" class="form-label">URL</label>
+        <input id="url" name="url" value="{{ listing.url }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="list_price" class="form-label">List Price</label>
+        <input id="list_price" name="list_price" value="{{ listing.list_price }}" required>
+
+        <label for="monthly_hoa" class="form-label">HOA</label>
+        <input id="monthly_hoa" name="monthly_hoa" value="{{ listing.monthly_hoa }}" required>
+
+        <label for="annual_property_tax" class="form-label">Property Taxes</label>
+        <input id="annual_property_tax" name="annual_property_tax" value="{{ listing.annual_property_tax }}" required>
+    </div>
+
+    {% for col_group in col_groups %}
+        {% set col_group_name = col_group %}
+        <div class="mb-3">
+            <h6>{{ col_group_name }}:</h6>
+            {% for col, attributes in cols.items() %}
+                {% if attributes[0] == col_group_name %}
+                    {% if attributes[1] == 'Boolean' %}
+                        <label for="{{ col }}">{{ attributes[2] }}</label>                          
+                        <input id="{{ col }}" name="{{ col }}" type="checkbox" value="1" {% if listing[col] %}checked{% endif %}>
+                    {% elif attributes[1] == 'Integer' %}
+                        <label for="{{ col }}" >{{ attributes[2] }}</label>
+                        <input id="{{ col }}" name="{{ col }}" type="number" value="{{ listing[col] }}">
+                    {% endif %}
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="{{ url_for('listings') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

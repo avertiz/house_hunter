@@ -1,0 +1,48 @@
+col,db.type,display_name,col_group,av_model_weight,inverse_scoring
+brick_building,Boolean,Brick Building,Deal Breaker,50,1
+garden_unit,Boolean,Garden Unit,Deal Breaker,50,-1
+parking,Integer,Parking,Deal Breaker,10,1
+in_unit_laundry,Integer,In Unit Laundry,Deal Breaker,10,1
+top_floor,Boolean,Top Floor,Important,10,1
+busy_street,Integer,Busy Street,Important,10,-1
+hvac,Integer,Hvac,Important,10,1
+owner_occupancy,Integer,Owner Occupancy Rate,Important,7.5,1
+overall_size,Integer,Overall Size,Important,10,1
+train,Integer,Train,Location,7.5,1
+grocery_store,Integer,Grocery Store,Location,7.5,1
+gym,Integer,Gym,Location,7.5,1
+park,Integer,Park,Location,4,1
+lake,Integer,Lake,Location,4,1
+hoa_funding,Integer,Hoa Funding,Cost,0,1
+special_assessments,Integer,Special Assessments,Cost,0,1
+windows,Integer,Windows,Structure/Layout,5,1
+walls,Integer,Walls,Structure/Layout,5,1
+office_space,Integer,Office Space,Structure/Layout,10,1
+flooring,Integer,Flooring,Structure/Layout,7.5,1
+carpet,Integer,Carpet,Structure/Layout,7.5,1
+natural_light,Integer,Natural Light,Structure/Layout,10,1
+open_floorplan,Integer,Open Floorplan,Structure/Layout,10,1
+dining_room,Integer,Dining Room,Structure/Layout,7.5,1
+balcony,Integer,Balcony,Ammenities,7.5,1
+outdoor_space,Integer,Outdoor Space,Ammenities,5,1
+rooftop,Integer,Rooftop,Ammenities,2.5,1
+nooks,Integer,Nooks,Ammenities,5,1
+fireplace,Integer,Fireplace,Ammenities,2.5,1
+microwave,Boolean,Microwave,Kitchen,5,1
+wine_cooler,Boolean,Wine Cooler,Kitchen,1,1
+kitchen_cabinets,Integer,Cabinets,Kitchen,5,1
+kitchen_counters,Integer,Counters,Kitchen,7.5,1
+bartop,Integer,Bartop,Kitchen,7.5,1
+kitchen_sink,Integer,Sink,Kitchen,5,1
+stove,Integer,Stove,Kitchen,7.5,1
+island,Integer,Island,Kitchen,5,1
+en_suite_bathroom,Boolean,En Suite Bathroom,Bathrooms,10,1
+bathroom_showers,Integer,Showers,Bathrooms,7.5,1
+bathroom_vanities,Integer,Vanities,Bathrooms,2.5,1
+master_bathroom,Integer,Master Bathroom,Bathrooms,7.5,1
+master_vanity,Integer,Master Vanity,Bathrooms,5,1
+master_closet,Integer,Master Closet,Bedrooms,10,1
+master_bedroom,Integer,Master Bedroom,Bedrooms,10,1
+closets,Integer,Closets,Storage,7.5,1
+cabinet_storage,Integer,Cabinet Storage,Storage,7.5,1
+storage_unit,Integer,Storage Unit,Storage,7.5,1
