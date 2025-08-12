@@ -15,13 +15,13 @@ setup_local:
 	$(VENV_DIR)/bin/pip install -r requirements.txt
 
 setup_cloud:
-	export FLASK_APP=app.py && pip install -r requirements.txt && flask db upgrade
+	ls && pip install -r requirements.txt && flask db upgrade
 
 run:
 	FLASK_APP=app.py FLASK_ENV=development $(VENV_DIR)/bin/flask run --host=0.0.0.0 --port=8080
 
 run_prod:
-	gunicorn app:app
+	ls && gunicorn app:app
 
 clean:
 	rm -rf $(VENV_DIR)
