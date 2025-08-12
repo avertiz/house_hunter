@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, session, url_for
 from models import db, User, Listing, Comment
 from datetime import datetime
@@ -7,7 +8,10 @@ from src import calc_av_model_score, calc_cost_score, calc_av_total_possible_sco
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    "DATABASE_URL",  # Provided by Render for Postgres
+    "sqlite:///db.sqlite3"  # Fallback for local dev
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
